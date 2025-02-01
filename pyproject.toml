@@ -6,6 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "imscriber"
 version = "0.1"
 dependencies = [
+  "pillow==11.0.0",
+  "ollama==0.4.7"
 ]
 
 [project.scripts]
