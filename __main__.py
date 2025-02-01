@@ -15,8 +15,8 @@ def process_image(image_file, host, port):
             full_response = ''
             
             for response in client.generate(
-                model='llava:34b',
-                prompt='describe this image and make sure to include anything notable about it',
+                model='llava:13b',
+                prompt='describe this image and make sure to include anything notable about it. Be extra descriptive of the facial expression',
                 images=[image_bytes],
                 stream=True
             ):
