@@ -4,7 +4,7 @@ from ollama import Client
 from PIL import Image
 from io import BytesIO
 
-def process_image(image_file, host, port, prompt):
+def process_image(image_file, model, host, port, prompt):
     client = Client(host=f"http://{host}:{port}")
     
     with Image.open(image_file) as img:
@@ -15,7 +15,7 @@ def process_image(image_file, host, port, prompt):
             full_response = ''
             
             for response in client.generate(
-                model='llava:13b',
+                model=model,
                 prompt=prompt,
                 images=[image_bytes],
                 stream=True
@@ -32,9 +32,10 @@ def main():
     parser.add_argument("--host", default="localhost", help="Host address of the Ollama server")
     parser.add_argument("--port", default=11434, help="Port number of the Ollama server")
     parser.add_argument("--prompt", default="describe the image", help="Prompt to guide the model")
+    parser.add_argument("--model", default="llava-llama3:latest", help="Prompt to guide the model")
     args = parser.parse_args()
     
-    response = process_image(args.image, args.host, args.port, args.prompt)
+    response = process_image(args.image, args.model, args.host, args.port, args.prompt)
     print(response)
 
 if __name__ == '__main__':
